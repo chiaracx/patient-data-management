@@ -1,4 +1,8 @@
-# React + Vite
+# Patient Data Management
+
+A patient data management system built with React + Vite.
+
+## Development Setup
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
