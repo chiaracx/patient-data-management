@@ -1,0 +1,16 @@
+.modal--edit form > *{
+    color: #252424;
+}
+
+.modal--edit form .modal--title{
+    color: #044c61;
+}
+
+.modal--edit .modal--content .modal--field{
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.modal--edit .modal--content .modal--field > *{
+    font-weight: 500;
+}
