@@ -38,10 +38,10 @@ const PatientList = () => {
   return (
     
   <div>
-    <div className="flex justify-end p-6">
+    <div className="flex justify-center p-6">
       <button
         onClick={() => setIsAddModalOpen(true)}
-        className="button--add-patient flex justify-center items-center gap-x-2 bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800"
+        className="button--add-patient flex justify-center items-center gap-x-2 bg-green-700 text-white px-4 py-2 rounded-2xl hover:bg-green-800"
       >
         <img
         className="w-5 h-5 rounded-full"
@@ -58,7 +58,7 @@ const PatientList = () => {
           onSave={handleAddProfile}
         />
       )}
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 p-6">
       {profiles.map((patient, index) => (
         <ProfileCard
             key={index}
