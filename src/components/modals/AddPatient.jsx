@@ -1,5 +1,6 @@
 import { useState } from "react";
-import '../../styles/Modal.css';
+import { validatePatientData } from "../../utils/validatePatientData.js";
+import '../../styles/base.css';
 
 const AddPatientModal = ({ onClose, onSave }) => {
     const [formData, setFormData] = useState({
@@ -19,8 +20,9 @@ const AddPatientModal = ({ onClose, onSave }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!formData.name || !formData.description) {
-            alert("Please fill in all required fields.");
+        const errors = validatePatientData(formData);
+        if (errors && Object.keys(errors).length > 0) {
+            alert(errors.name || errors.description || errors.website);
             return;
         }
         const newPatient = {
@@ -93,7 +95,7 @@ const AddPatientModal = ({ onClose, onSave }) => {
                         </label>
                     </div>
 
-                    <div className="mmodal--footer flex justify-center gap-4 mt-6">
+                    <div className="modal--footer flex justify-center gap-4 mt-6">
                         <button type="button" onClick={onClose} className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancel</button>
                         <button type="submit" className="px-4 py-2 bg-cyan-600 text-white rounded hover:bg-cyan-700">Save</button>
                     </div>

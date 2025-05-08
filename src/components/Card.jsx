@@ -1,4 +1,5 @@
-import '../styles/Card.css';
+import '../styles/base.css';
+import { formatDate } from '../utils/formatDate.js';
 import defaultAvatar from '../assets/user.svg';
 import collapseIcon from '../assets/collapseIcon.svg';
 import expandIcon from '../assets/expandIcon.svg';
@@ -6,8 +7,8 @@ import editIcon from '../assets/editIcon.svg';
 import addIcon from '../assets/addIcon.svg';
 import { useState } from 'react';
 
-const ProfileCard = ({ name, avatar, description, website, createdDate, patient, onEdit }) => {
-    const srcAvatar = avatar || defaultAvatar;
+const ProfileCard = ({patient, onEdit }) => {
+    const srcAvatar = patient.avatar || defaultAvatar;
     const [expanded, setExpanded] = useState(false);
 
     return(
@@ -36,19 +37,19 @@ const ProfileCard = ({ name, avatar, description, website, createdDate, patient,
                 <img 
                 className="w-24 h-24 rounded-full mx-auto" 
                 src={srcAvatar} 
-                alt={name || 'User'}
+                alt={patient.name || 'User'}
                 onError={(e) => (e.target.src = defaultAvatar)}
                 />
-                <h2 className="card--title text-xl font-semibold text-center mt-2">{name}</h2>
+                <h2 className="card--title text-xl font-semibold text-center mt-2">{patient.name}</h2>
             </div>
         
             <div className="card--content">
-                <p className="text-sm text-gray-500 text-center">{new Date(createdDate).toLocaleDateString()}</p>
-                <p className="text-gray-700 text-sm mt-2">{description}</p>
+                <p className="text-sm text-gray-500 text-center">{formatDate(patient.createdAt)}</p>
+                <p className="text-gray-700 text-sm mt-2">{patient.description}</p>
             </div>
             <div className="card--link">
                 <a
-                    href={website}
+                    href={patient.website}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block text-center mt-4 font-semibold text-cyan-700"

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import '../../styles/Modal.css';
+import '../../styles/base.css';
 
 const EditModal = ({ patient, onClose, onSave }) => {
     const [formData, setFormData] = useState({

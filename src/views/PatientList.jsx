@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import ProfileCard from "./Card.jsx";
-import EditModal from "./modals/EditModal.jsx";
-import AddPatientModal from "./modals/AddPatient.jsx";
+import ProfileCard from "../components/Card.jsx";
+import EditModal from "../components/modals/EditModal.jsx";
+import AddPatientModal from "../components/modals/AddPatient.jsx";
 import addIcon from "../assets/addIcon.svg";
 
 const PatientList = () => {
@@ -62,12 +62,6 @@ const PatientList = () => {
       {profiles.map((patient, index) => (
         <ProfileCard
             key={index}
-            name={patient.name}
-            avatar={patient.avatar}
-            description={patient.description}
-            website={patient.website}
-            createdDate={patient.createdAt}
-            id={patient.id}
             patient={patient}
             onEdit={() => handleEdit(patient)}
         />
