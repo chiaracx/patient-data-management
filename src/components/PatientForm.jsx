@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { validatePatientData } from "../utils/validatePatientData.js";
-import '../styles/base.css';
 
 const AddPatientModal = ({ patient, onClose, onSave }) => {
     const [formData, setFormData] = useState({
