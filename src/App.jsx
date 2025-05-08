@@ -1,5 +1,5 @@
 import './styles/base.css'
-import PatientList from './views/PatientList.jsx'
+import PatientList from './components/PatientList.jsx'
 
 function App() {
 

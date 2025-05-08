@@ -1,39 +1,22 @@
 import { useEffect, useState } from "react";
-import ProfileCard from "../components/Card.jsx";
-import EditModal from "../components/modals/EditModal.jsx";
-import AddPatientModal from "../components/modals/AddPatient.jsx";
+import ProfileCard from "./Card.jsx";
+import EditModal from "./modals/EditModal.jsx";
+import AddPatientModal from "./modals/AddPatient.jsx";
+import { usePatients } from "../hooks/usePatients.js";
 import addIcon from "../assets/addIcon.svg";
 
 const PatientList = () => {
-  const [profiles, setProfiles] = useState([]);
+  const { patients, addPatient, updatePatient, setPatients } = usePatients();
   const [selectedPatient, setSelectedPatient] = useState(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-
-  useEffect(() => {
-    fetch("https://63bedcf7f5cfc0949b634fc8.mockapi.io/users")
-      .then((res) => res.json())
-      .then((data) => setProfiles(data))
-      .catch((error) => console.error("Error while loading patient profiles:", error));
-  }, []);
 
     const handleEdit = (patient) => {
         setSelectedPatient(patient);
     }
 
-    const handleSave = (updatedPatient) => {
-        setProfiles((prevProfiles) =>
-            prevProfiles.map((patient) =>
-            patient.id === updatedPatient.id ? updatedPatient : patient
-            )
-        );
-    }
     const handleClose = () => {
         setSelectedPatient(null);
     }
-
-    const handleAddProfile = (newPatient) => {
-      setProfiles((prev) => [...prev, newPatient]);
-    };
 
   return (
     
@@ -55,11 +38,11 @@ const PatientList = () => {
     {isAddModalOpen && (
         <AddPatientModal
           onClose={() => setIsAddModalOpen(false)}
-          onSave={handleAddProfile}
+          onSave={addPatient}
         />
       )}
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 p-6">
-      {profiles.map((patient, index) => (
+      {patients.map((patient, index) => (
         <ProfileCard
             key={index}
             patient={patient}
@@ -70,7 +53,7 @@ const PatientList = () => {
         <EditModal
           patient={selectedPatient}
           onClose={handleClose}
-          onSave={handleSave}
+          onSave={updatePatient}
         />
       )}
     </div>
