@@ -1,16 +1,61 @@
-# Patient Data Management
+# 🏥 Patient Data Management
 
-A patient data management system built with React + Vite.
+Here you can find a first version of a simple React-based frontend application designed to manage patient records. 
+It fetches patient data from a remote API and displays it in individual cards. Users can add or edit patient information through modals; however, these changes are not persisted to the backend.
 
-## Development Setup
+## 🛠 Technologies Used
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- React – For building user interfaces and managing component state.
 
-Currently, two official plugins are available:
+- Vite – A fast development build tool that provides a modern frontend workflow.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Tailwind CSS – A utility-first CSS framework for rapid UI development.
 
-## Expanding the ESLint configuration
+- JavaScript (ES6+) – For application logic and component development.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📁 Project Structure
+
+The project follows a modular structure, organizing code into specific directories for clarity and maintainability:
+
+- components : Reusable UI components (e.g., PatientCard, PatientForm)
+
+- services : API interaction logic
+
+- styles : Global styles including Tailwind CSS directives
+
+- utils : Utility functions (e.g., date formatting)
+
+- App.jsx : Root component and main state handling
+
+- main.jsx : Entry point of the React app
+
+## ▶️ Getting Started
+
+Prerequisites
+Ensure you have the following installed:
+
+- Node.js (version 16 or higher)
+- npm (version 7 or higher)
+
+Installation: 
+- Clone the repository:
+- git clone https://github.com/chiaracx/patient-data-management.git
+- cd patient-data-management
+
+Install dependencies:
+- npm install
+
+Start the development server:
+- npm run dev
+
+Access the application:
+- Open your browser and navigate to http://localhost:5173
+
+
+## 📌 Some quick notes to consider
+
+Data Persistence: Currently, any additions or edits to patient data are handled on the frontend and are not persisted to the backend API.
+
+API Configuration: The API endpoint is defined in the services/patientService.js file. Ensure that the API is accessible.
+
+Styling: Besides custom styles added, Tailwind CSS is used for styling components.
