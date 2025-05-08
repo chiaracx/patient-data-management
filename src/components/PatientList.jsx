@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import ProfileCard from "./Card.jsx";
-import EditModal from "./modals/EditModal.jsx";
-import AddPatientModal from "./modals/AddPatient.jsx";
+import PatientForm from "./PatientForm.jsx";
 import { usePatients } from "../hooks/usePatients.js";
 import addIcon from "../assets/addIcon.svg";
 
 const PatientList = () => {
   const { patients, addPatient, updatePatient, setPatients } = usePatients();
+
   const [selectedPatient, setSelectedPatient] = useState(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
@@ -36,7 +36,8 @@ const PatientList = () => {
       </button>
     </div>
     {isAddModalOpen && (
-        <AddPatientModal
+        <PatientForm
+          patient={null}
           onClose={() => setIsAddModalOpen(false)}
           onSave={addPatient}
         />
@@ -50,7 +51,7 @@ const PatientList = () => {
         />
       ))}
       {selectedPatient && (
-        <EditModal
+        <PatientForm
           patient={selectedPatient}
           onClose={handleClose}
           onSave={updatePatient}

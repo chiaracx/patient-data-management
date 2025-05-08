@@ -1,16 +1,19 @@
 import { useState, useEffect } from "react";
-import '../../styles/base.css';
+import { validatePatientData } from "../utils/validatePatientData.js";
+import '../styles/base.css';
 
-const EditModal = ({ patient, onClose, onSave }) => {
+const AddPatientModal = ({ patient, onClose, onSave }) => {
     const [formData, setFormData] = useState({
         name: "",
         avatar: "",
         description: "",
-        website: "",
+        website: "",    
     });
 
-    useEffect(() => {
-        if(patient) {
+    const isEdit = Boolean(patient);
+
+     useEffect(() => {
+        if(isEdit) {
             setFormData({
                 name: patient.name || "",
                 avatar: patient.avatar || "",
@@ -27,12 +30,22 @@ const EditModal = ({ patient, onClose, onSave }) => {
             [name]: value,
         }));
     };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSave({ ...patient, ...formData});
+        const errors = validatePatientData(formData);
+        if (errors && Object.keys(errors).length > 0) {
+            alert(errors.name || errors.description || errors.website);
+            return;
+        }
+        const newPatient = {
+            ...formData,
+            id: isEdit ? patient.id : crypto.randomUUID(),
+            createdAt: isEdit ? patient.createdAt : new Date().toISOString()
+        };
+        onSave(newPatient);
         onClose();
-    };
-
+    }
 
     return(
         <>
@@ -43,7 +56,7 @@ const EditModal = ({ patient, onClose, onSave }) => {
                 className="bg-white rounded-xl shadow-lg p-6 w-full max-w-md"
                 >
                     <div className="modal--header">
-                        <h2 className="modal--title text-xl font-bold mb-4">Edit Patient</h2>
+                        <h2 className="modal--title text-xl font-bold mb-4">New Patient</h2>
                     </div>
 
                     <div className="modal--content">
@@ -55,6 +68,7 @@ const EditModal = ({ patient, onClose, onSave }) => {
                             value={formData.name}
                             onChange={handleChange}
                             className="w-full mt-1 p-2 border rounded"
+                            required
                             />
                         </label>
 
@@ -72,24 +86,28 @@ const EditModal = ({ patient, onClose, onSave }) => {
                         <label className="modal--field block">
                             Description:
                             <textarea
-                            name="description"
-                            value={formData.description}
-                            onChange={handleChange}
-                            className="w-full mt-1 p-2 border rounded"
+                                name="description"
+                                value={formData.description}
+                                onChange={handleChange}
+                                placeholder="Enter a brief description"
+                                className="w-full mt-1 p-2 border rounded"
+                                rows={4}
+                                required
                             />
                         </label>
 
                         <label className="modal--field block">
                             Website:
                             <input
-                            type="url"
-                            name="website"
-                            value={formData.website}
-                            onChange={handleChange}
-                            className="w-full mt-1 p-2 border rounded"
+                                type="url"
+                                name="website"
+                                value={formData.website}
+                                onChange={handleChange}
+                                placeholder="https://example.com"
+                                className="w-full mt-1 p-2 border rounded"
                             />
                         </label>
-                    </div>                
+                    </div>
 
                     <div className="modal--footer flex justify-center gap-4 mt-6">
                         <button type="button" onClick={onClose} className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancel</button>
@@ -101,4 +119,4 @@ const EditModal = ({ patient, onClose, onSave }) => {
     );
 }
 
-export default EditModal;
+export default AddPatientModal;
